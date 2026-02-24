@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rayhan Ahmed — Admin</title>
+
+  <!-- Netlify Identity Widget -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+  <!-- DecapCMS — only loads AFTER identity confirms login -->
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #04060f;
+      color: #e8eaf6;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── Password gate ── */
+    .gate-box {
+      text-align: center;
+      padding: 48px 36px;
+      max-width: 400px;
+      width: 90%;
+      background: rgba(14, 28, 80, 0.5);
+      border: 1px solid rgba(79, 158, 255, 0.18);
+      border-radius: 20px;
+      backdrop-filter: blur(24px);
+      box-shadow: 0 30px 80px rgba(0, 0, 30, 0.7);
+      position: relative;
+      overflow: hidden;
+    }
+    .gate-box::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 10%; right: 10%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(79,158,255,0.55), transparent);
+    }
+    .gate-logo {
+      font-family: Georgia, serif;
+      font-size: 2.8rem;
+      font-weight: 400;
+      color: #fff;
+      letter-spacing: -0.02em;
+      text-shadow: 0 0 40px rgba(79,158,255,0.35);
+      margin-bottom: 6px;
+    }
+    .gate-sub {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      color: #4f9eff;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+    .gate-label {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: #a5c8ff;
+      text-align: left;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .gate-input {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(79,158,255,0.22);
+      border-radius: 10px;
+      padding: 13px 16px;
+      color: #e8eaf6;
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      outline: none;
+      margin-bottom: 20px;
+      transition: border-color 0.25s, box-shadow 0.25s;
+      font-family: monospace;
+    }
+    .gate-input:focus {
+      border-color: #4f9eff;
+      box-shadow: 0 0 0 3px rgba(79,158,255,0.12);
+    }
+    .gate-btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #1e4fd8, #2563eb);
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 24px rgba(37,99,235,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .gate-btn:hover { box-shadow: 0 8px 32px rgba(37,99,235,0.55); transform: translateY(-1px); }
+    .gate-btn:active { transform: translateY(0); }
+    .gate-error {
+      margin-top: 14px;
+      font-size: 0.78rem;
+      color: #f87171;
+      min-height: 18px;
+      letter-spacing: 0.04em;
+    }
+    .gate-note {
+      margin-top: 20px;
+      font-size: 0.68rem;
+      color: #1e2d45;
+      letter-spacing: 0.05em;
+    }
+
+    /* shake animation on wrong password */
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      20%,60% { transform: translateX(-8px); }
+      40%,80% { transform: translateX(8px); }
+    }
+    .shake { animation: shake 0.4s ease; }
+
+    /* ── Netlify Identity gate (shown after password passes) ── */
+    #identity-gate {
+      text-align: center;
+      padding: 48px 32px;
+      max-width: 420px;
+      width: 90%;
+      background: rgba(14, 28, 80, 0.45);
+      border: 1px solid rgba(79, 158, 255, 0.18);
+      border-radius: 20px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 30px 80px rgba(0, 0, 30, 0.6);
+      position: relative;
+      overflow: hidden;
+      display: none;
+    }
+    #identity-gate::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 10%; right: 10%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(79,158,255,0.6), transparent);
+    }
+    .login-logo {
+      font-family: Georgia, serif;
+      font-size: 2.8rem;
+      font-weight: 400;
+      color: #fff;
+      letter-spacing: -0.02em;
+      text-shadow: 0 0 40px rgba(79,158,255,0.4);
+      margin-bottom: 6px;
+    }
+    .login-sub {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      color: #4f9eff;
+      text-transform: uppercase;
+      margin-bottom: 36px;
+    }
+    .login-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, #1e4fd8, #2563eb);
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 24px rgba(37,99,235,0.35);
+    }
+    .login-btn:hover { box-shadow: 0 8px 32px rgba(37,99,235,0.55); transform: translateY(-1px); }
+    .login-note { margin-top: 24px; font-size: 0.72rem; color: #2e3d5a; letter-spacing: 0.04em; }
+
+    /* ── CMS container (hidden until both gates pass) ── */
+    #cms-root { display: none; }
+  </style>
+</head>
+<body>
+
+  <!-- Layer 1: Password gate -->
+  <div class="gate-box" id="passwordGate">
+    <div class="gate-logo">RA</div>
+    <div class="gate-sub">Content Management</div>
+
+    <label class="gate-label" for="pwInput">Password</label>
+    <input
+      class="gate-input"
+      type="password"
+      id="pwInput"
+      placeholder="••••••••••••"
+      autocomplete="current-password"
+      onkeydown="if(event.key==='Enter') checkPassword()"
+    />
+
+    <button class="gate-btn" onclick="checkPassword()">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+      </svg>
+      Enter
+    </button>
+
+    <div class="gate-error" id="pwError"></div>
+    <p class="gate-note">Access restricted · Authorised personnel only</p>
+  </div>
+
+  <!-- Layer 2: Netlify Identity gate (shown after password passes) -->
+  <div id="identity-gate">
+    <div class="login-logo">RA</div>
+    <div class="login-sub">Verify Identity</div>
+
+    <button class="login-btn" id="loginBtn" onclick="netlifyIdentity.open()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+      </svg>
+      Sign In to Continue
+    </button>
+
+    <p class="login-note">Access restricted · Authorised personnel only</p>
+  </div>
+
+  <!-- DecapCMS mounts here after both gates pass -->
+  <div id="cms-root"></div>
+
+  <script>
+    // ═══════════════════════════════════════
+    //  LAYER 1 — PASSWORD GATE
+    //  Change the password below to whatever you want
+    // ═══════════════════════════════════════
+    const ADMIN_PASSWORD = 'Rayhan@2026!';
+
+    // Track attempts to prevent brute force
+    let attempts = 0;
+    let lockUntil = 0;
+
+    function checkPassword() {
+      const now = Date.now();
+      if (now < lockUntil) {
+        const secs = Math.ceil((lockUntil - now) / 1000);
+        document.getElementById('pwError').textContent = `Too many attempts. Wait ${secs}s.`;
+        return;
+      }
+
+      const input = document.getElementById('pwInput').value;
+      if (input === ADMIN_PASSWORD) {
+        // Password correct — move to identity gate
+        sessionStorage.setItem('ra_pw_ok', '1');
+        document.getElementById('passwordGate').style.display = 'none';
+        document.getElementById('identity-gate').style.display = 'block';
+        attempts = 0;
+        initIdentity();
+      } else {
+        attempts++;
+        document.getElementById('pwError').textContent =
+          attempts >= 3
+            ? `Incorrect password. ${5 - attempts} attempt(s) left.`
+            : 'Incorrect password.';
+
+        // Shake the box
+        const box = document.getElementById('passwordGate');
+        box.classList.remove('shake');
+        void box.offsetWidth;
+        box.classList.add('shake');
+
+        document.getElementById('pwInput').value = '';
+        document.getElementById('pwInput').focus();
+
+        // Lock after 5 failed attempts for 30 seconds
+        if (attempts >= 5) {
+          lockUntil = Date.now() + 30000;
+          attempts  = 0;
+          document.getElementById('pwError').textContent = 'Locked for 30 seconds.';
+        }
+      }
+    }
+
+    // If already passed password this session, skip to identity
+    if (sessionStorage.getItem('ra_pw_ok') === '1') {
+      document.getElementById('passwordGate').style.display  = 'none';
+      document.getElementById('identity-gate').style.display = 'block';
+    }
+
+    // ═══════════════════════════════════════
+    //  LAYER 2 — NETLIFY IDENTITY
+    // ═══════════════════════════════════════
+    function initIdentity() {
+      netlifyIdentity.init({
+        // Replace with your Netlify site URL after setup
+        APIUrl: "https://YOUR-NETLIFY-SITE.netlify.app/.netlify/identity"
+      });
+
+      netlifyIdentity.on('init', user => {
+        if (user) loadCMS();
+      });
+
+      netlifyIdentity.on('login', user => {
+        netlifyIdentity.close();
+        loadCMS();
+      });
+
+      netlifyIdentity.on('logout', () => {
+        sessionStorage.removeItem('ra_pw_ok');
+        document.getElementById('passwordGate').style.display  = 'flex';
+        document.getElementById('identity-gate').style.display = 'none';
+        document.getElementById('cms-root').style.display      = 'none';
+        const s = document.getElementById('decap-script');
+        if (s) s.remove();
+      });
+    }
+
+    // Auto-init identity if session already passed password
+    if (sessionStorage.getItem('ra_pw_ok') === '1') {
+      initIdentity();
+    }
+
+    function loadCMS() {
+      document.getElementById('identity-gate').style.display = 'none';
+      document.getElementById('cms-root').style.display      = 'block';
+
+      if (!document.getElementById('decap-script')) {
+        const script = document.createElement('script');
+        script.id    = 'decap-script';
+        script.src   = 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js';
+        document.body.appendChild(script);
+      }
+    }
+  </script>
+
+</body>
+</html>

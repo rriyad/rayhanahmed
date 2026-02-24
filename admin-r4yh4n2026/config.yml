@@ -1,0 +1,103 @@
+# ─────────────────────────────────────────────────
+#  DECAP CMS CONFIG
+#  Admin URL: /admin-r4yh4n2026/
+#  Auth: Netlify Identity (email + password)
+# ─────────────────────────────────────────────────
+
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+collections:
+
+  # ── WRITINGS ──────────────────────────────────────
+  - name: "writings"
+    label: "Writings"
+    label_singular: "Writing"
+    folder: "content/writings"
+    create: true
+    delete: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{title}} ({{date}})"
+    sortable_fields: ['date', 'title']
+    fields:
+      - { label: "Title",
+          name: "title",
+          widget: "string" }
+
+      - { label: "Cover Image URL",
+          name: "cover",
+          widget: "string",
+          required: false,
+          hint: "Paste any image URL — Google Drive, Dropbox, Unsplash, etc. Leave blank for a gradient placeholder. For Google Drive: Share → Anyone with the link → copy link." }
+
+      - { label: "Excerpt",
+          name: "excerpt",
+          widget: "text",
+          hint: "1–2 sentences shown on the card preview." }
+
+      - { label: "Read Time",
+          name: "readTime",
+          widget: "string",
+          default: "5 min read" }
+
+      - { label: "Publish Date",
+          name: "date",
+          widget: "datetime",
+          format: "YYYY-MM-DD",
+          date_format: "MMMM D, YYYY",
+          time_format: false }
+
+      - { label: "Body",
+          name: "body",
+          widget: "markdown" }
+
+  # ── VISUAL STORYTELLING ───────────────────────────
+  - name: "media"
+    label: "Visual Storytelling"
+    label_singular: "Item"
+    folder: "content/media"
+    create: true
+    delete: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{title}} — {{type}} ({{date}})"
+    sortable_fields: ['date', 'title', 'type']
+    fields:
+      - { label: "Title",
+          name: "title",
+          widget: "string" }
+
+      - label: "Type"
+        name: "type"
+        widget: "select"
+        options: ["Image", "Video", "Audio"]
+        default: "Image"
+        hint: "Used for the filter tabs (All / Image / Video / Audio) on the site."
+
+      - { label: "Thumbnail / Cover Image URL",
+          name: "cover",
+          widget: "string",
+          required: false,
+          hint: "Optional. Paste any image URL for the card thumbnail. Leave blank for a clean dark placeholder. For Google Drive: Share → Anyone with the link → copy link." }
+
+      - { label: "Description",
+          name: "description",
+          widget: "text",
+          required: false,
+          hint: "Shown when someone taps the card. Keep it concise." }
+
+      - { label: "Publish Date",
+          name: "date",
+          widget: "datetime",
+          format: "YYYY-MM-DD",
+          date_format: "MMMM D, YYYY",
+          time_format: false }
+
+      - { label: "Media Link (private)",
+          name: "url",
+          widget: "string",
+          required: false,
+          hint: "Your private reference link (Google Drive, YouTube, etc.). This is stored in your CMS only — it is NOT shown to visitors on the website." }

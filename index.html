@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
+  <meta name="theme-color" content="#04060f"/>
+  <title>Rayhan Ahmed</title>
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180x180.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=DM+Sans:wght@300;400;500&family=Dancing+Script:wght@700&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --navy:#04060f;--deep:#070c1c;--mid:#0a1230;
+      --glass:rgba(14,28,80,0.45);
+      --blue:#4f9eff;--blue2:#2563eb;
+      --text:#e8eaf6;--muted:#8899bb;--accent:#a5c8ff;
+      --border:rgba(79,158,255,0.18);
+      --sm:clamp(16px,3vw,28px);
+      --md:clamp(28px,5vw,56px);
+      --lg:clamp(56px,8vw,100px);
+      --xl:clamp(80px,10vw,140px);
+    }
+    html{scroll-behavior:smooth;}
+    body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.6;}
+    img{max-width:100%;display:block;}
+    ::-webkit-scrollbar{width:4px;}
+    ::-webkit-scrollbar-track{background:var(--navy);}
+    ::-webkit-scrollbar-thumb{background:var(--blue2);border-radius:2px;}
+
+    /* ── HERO ── */
+    #hero{position:relative;width:100%;background:#04060f;overflow:hidden;}
+    .hero-img{width:100%;height:auto;display:block;opacity:0;animation:imgIn 1.2s ease .1s forwards;}
+    @keyframes imgIn{to{opacity:1;}}
+    .ptcls{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:2;}
+    .ptcls span{position:absolute;border-radius:50%;background:var(--blue);animation:floatUp linear infinite;opacity:0;}
+    @keyframes floatUp{0%{opacity:0;transform:translateY(0) scale(1);}10%{opacity:.6;}90%{opacity:.3;}100%{opacity:0;transform:translateY(-120vh) scale(.3);}}
+
+    /* ── SECTIONS ── */
+    section{padding:var(--xl) 0;position:relative;}
+    .inner{max-width:1100px;margin:0 auto;padding:0 var(--sm);width:100%;}
+    .sh{text-align:center;margin-bottom:var(--md);}
+    .st{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:300;color:#fff;line-height:1.1;}
+    .sl{width:100%;height:1px;background:linear-gradient(to right,transparent,var(--blue2),transparent);opacity:.4;margin-bottom:var(--md);}
+    .reveal{opacity:0;transform:translateY(32px);transition:opacity .7s,transform .7s;}
+    .reveal.visible{opacity:1;transform:none;}
+
+    /* ── FILTER TABS ── */
+    .tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:var(--md);}
+    .tab{padding:7px 18px;border-radius:100px;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:clamp(.7rem,1.8vw,.85rem);cursor:pointer;transition:all .25s;touch-action:manipulation;}
+    .tab:hover{border-color:var(--blue);color:var(--blue);}
+    .tab.active{background:rgba(79,158,255,.12);border-color:var(--blue);color:#fff;box-shadow:0 0 14px rgba(79,158,255,.2);}
+
+    /* ── GRID ── */
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:clamp(14px,2.5vw,24px);}
+
+    /* ── WRITINGS ── */
+    #writings{background:radial-gradient(ellipse 70% 50% at 10% 50%,rgba(10,30,100,.25) 0%,transparent 70%),var(--deep);}
+    .wc{background:var(--glass);border:1px solid var(--border);border-radius:16px;overflow:hidden;cursor:pointer;transition:transform .3s,box-shadow .3s,border-color .3s;backdrop-filter:blur(12px);}
+    .wc:hover{transform:translateY(-5px);box-shadow:0 20px 60px rgba(0,0,30,.6),0 0 28px rgba(79,158,255,.1);border-color:rgba(79,158,255,.35);}
+    @media(hover:none){.wc:hover{transform:none;box-shadow:none;border-color:var(--border);}}
+    .wc-img{width:100%;height:190px;object-fit:cover;display:block;}
+    .wc-ph{width:100%;height:190px;background:linear-gradient(135deg,rgba(10,20,60,.9),rgba(30,60,140,.4));position:relative;}
+    .wc-ph::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 100%,rgba(79,158,255,.2) 0%,transparent 60%);}
+    .wc-body{padding:clamp(16px,3vw,24px);}
+    .wc-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,2.5vw,1.45rem);font-weight:400;line-height:1.3;color:#fff;margin-bottom:10px;}
+    .wc-exc{font-size:.85rem;color:var(--muted);line-height:1.6;margin-bottom:16px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+    .wc-meta{font-size:.78rem;color:#5a6b8a;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+
+    /* ── MEDIA ── */
+    #media{background:radial-gradient(ellipse 60% 50% at 90% 50%,rgba(10,30,100,.2) 0%,transparent 70%),var(--navy);}
+    .mc{position:relative;border-radius:16px;overflow:hidden;cursor:pointer;border:1px solid var(--border);transition:transform .3s,box-shadow .3s;}
+    .mc:hover{transform:translateY(-5px) scale(1.01);box-shadow:0 24px 60px rgba(0,0,30,.7),0 0 28px rgba(79,158,255,.12);}
+    @media(hover:none){.mc:hover{transform:none;box-shadow:none;}}
+    .mc-img{width:100%;height:clamp(200px,30vw,260px);object-fit:cover;display:block;transition:transform .5s;}
+    .mc:hover .mc-img{transform:scale(1.04);}
+    .mc-ph{width:100%;height:clamp(200px,30vw,260px);background:linear-gradient(160deg,rgba(5,10,28,.97),rgba(15,35,90,.85));position:relative;}
+    .mc-ph::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,rgba(79,158,255,.08) 0%,transparent 70%);}
+    .mc-ov{position:absolute;bottom:0;left:0;right:0;padding:clamp(16px,3vw,22px) clamp(14px,2.5vw,20px) clamp(14px,2.5vw,18px);background:linear-gradient(to top,rgba(4,6,15,.97) 0%,transparent 100%);}
+    .mc-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,2.5vw,1.25rem);font-weight:400;color:#fff;}
+
+    /* ── EMPTY STATE ── */
+    .empty{grid-column:1/-1;text-align:center;padding:clamp(40px,8vw,80px) 20px;color:#2e3d5a;}
+    .empty svg{margin:0 auto 16px;opacity:.2;display:block;}
+    .empty p{font-size:.88rem;letter-spacing:.05em;}
+
+    /* ── CONTACT ── */
+    #contact{background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(10,30,120,.3) 0%,transparent 60%),var(--deep);}
+    .fw{max-width:680px;margin:0 auto;width:100%;background:var(--glass);border:1px solid var(--border);border-radius:20px;padding:var(--md);backdrop-filter:blur(24px);box-shadow:0 0 0 1px rgba(79,158,255,.06),0 40px 100px rgba(0,0,30,.5);position:relative;overflow:hidden;}
+    .fw::before{content:'';position:absolute;top:0;left:10%;right:10%;height:2px;background:linear-gradient(to right,transparent,var(--blue),transparent);filter:blur(1px);}
+    .fg{margin-bottom:var(--sm);}
+    .fl{display:block;font-size:.78rem;letter-spacing:.08em;color:var(--accent);margin-bottom:8px;text-transform:uppercase;}
+    .fi,.ft{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(79,158,255,.2);border-radius:10px;padding:clamp(11px,2vw,14px) 16px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:clamp(.85rem,2vw,.9rem);font-weight:300;outline:none;transition:border-color .25s,box-shadow .25s,background .25s;-webkit-appearance:none;}
+    .fi::placeholder,.ft::placeholder{color:#3a4a66;}
+    .fi:focus,.ft:focus{border-color:var(--blue);background:rgba(79,158,255,.06);box-shadow:0 0 0 3px rgba(79,158,255,.1);}
+    .ft{resize:vertical;min-height:clamp(100px,15vw,130px);}
+    .fbtn{width:100%;margin-top:4px;padding:clamp(13px,2.5vw,16px) 24px;background:linear-gradient(135deg,#1e4fd8,#2563eb,#1d4ed8);border:none;border-radius:10px;color:#fff;font-family:'DM Sans',sans-serif;font-size:clamp(.85rem,2vw,.95rem);font-weight:500;letter-spacing:.07em;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 4px 24px rgba(37,99,235,.4);touch-action:manipulation;}
+    .fbtn:hover{box-shadow:0 8px 40px rgba(37,99,235,.6);transform:translateY(-1px);}
+    .fbtn:active{transform:none;}
+    .fbtn:disabled{opacity:.6;cursor:not-allowed;transform:none;}
+    .fmsg{padding:10px 0;font-size:.88rem;text-align:center;}
+    .fmsg.ok{color:#86efac;}
+    .fmsg.err{color:#fca5a5;}
+
+    /* ── FOOTER ── */
+    footer{position:relative;padding:var(--xl) 20px var(--lg);background:#02040b;overflow:hidden;text-align:center;}
+    .streak{position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(79,158,255,.3) 20%,rgba(255,255,255,.5) 50%,rgba(79,158,255,.3) 80%,transparent);animation:sp 4s ease-in-out infinite;}
+    .streak::after{content:'';position:absolute;top:-3px;left:-20%;width:20%;height:7px;background:radial-gradient(ellipse,rgba(255,255,255,.45),rgba(79,158,255,.25) 40%,transparent);filter:blur(3px);animation:gm 5s cubic-bezier(.4,0,.2,1) infinite 1.5s;}
+    @keyframes gm{0%{left:-20%;opacity:0;}10%{opacity:1;}90%{opacity:1;}100%{left:110%;opacity:0;}}
+    @keyframes sp{0%,100%{opacity:.5;}50%{opacity:.9;}}
+    .sig{width:clamp(240px,60vw,500px);height:auto;overflow:visible;display:block;margin:0 auto;}
+    .sig-fill{font-family:'Dancing Script',cursive;font-size:clamp(44px,10vw,64px);fill:rgba(255,255,255,.1);}
+    .sig-stroke{font-family:'Dancing Script',cursive;font-size:clamp(44px,10vw,64px);fill:none;stroke:rgba(255,255,255,.85);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;filter:url(#sg);stroke-dasharray:2000;stroke-dashoffset:2000;animation:pl 3.8s cubic-bezier(.35,0,.25,1) .5s infinite;}
+    @keyframes pl{0%{stroke-dashoffset:2000;opacity:1;}68%{stroke-dashoffset:0;opacity:1;}84%{stroke-dashoffset:0;opacity:1;}99%{stroke-dashoffset:0;opacity:0;}100%{stroke-dashoffset:2000;opacity:0;}}
+    .sig-nib{fill:rgba(130,195,255,.8);}
+    .gpool{margin:8px auto 0;width:clamp(160px,55%,300px);height:28px;background:radial-gradient(ellipse,rgba(79,158,255,.14),transparent 70%);filter:blur(14px);opacity:0;animation:gr 1s ease 3.5s forwards;}
+    @keyframes gr{to{opacity:1;}}
+    .copy{margin-top:24px;font-size:clamp(.66rem,1.8vw,.72rem);letter-spacing:.18em;color:#1e2d45;text-transform:uppercase;}
+
+    /* ── MODAL ── */
+    .mo{position:fixed;inset:0;background:rgba(0,0,10,.88);backdrop-filter:blur(12px);z-index:10000;display:flex;align-items:center;justify-content:center;padding:clamp(12px,3vw,20px);opacity:0;pointer-events:none;transition:opacity .3s;}
+    .mo.open{opacity:1;pointer-events:all;}
+    .mb{background:var(--mid);border:1px solid var(--border);border-radius:18px;max-width:720px;width:100%;max-height:88vh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:var(--md);position:relative;transform:translateY(20px) scale(.98);transition:transform .3s;}
+    .mo.open .mb{transform:none;}
+    .mc-close{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;touch-action:manipulation;}
+    .mc-close:hover{border-color:var(--blue);color:#fff;}
+    .mtitle{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,4vw,2.4rem);font-weight:400;color:#fff;line-height:1.2;margin-bottom:14px;}
+    .mmeta{font-size:.8rem;color:var(--muted);margin-bottom:24px;padding-bottom:18px;border-bottom:1px solid var(--border);}
+    .mbody{font-size:clamp(.85rem,2vw,.92rem);line-height:1.8;color:#b0bbcc;font-weight:300;}
+    .mbody h2{font-family:'Cormorant Garamond',serif;font-weight:400;color:#fff;margin:22px 0 10px;font-size:clamp(1.1rem,3vw,1.4rem);}
+    .mbody h3{font-family:'Cormorant Garamond',serif;font-weight:400;color:#dde8f8;margin:18px 0 8px;font-size:clamp(1rem,2.5vw,1.2rem);}
+    .mbody p{margin-bottom:14px;}
+    .mbody strong{color:var(--text);}
+    .mbody em{color:var(--accent);}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:599px){
+      .grid{grid-template-columns:1fr;gap:16px;}
+      .wc-img,.wc-ph{height:170px;}
+      .mc-img,.mc-ph{height:200px;}
+      .fw,.mb{border-radius:14px;}
+      .mb{padding:24px 18px;}
+    }
+    @media(min-width:1400px){.grid{grid-template-columns:repeat(3,1fr);}}
+    @supports(padding:max(0px)){
+      .inner{padding-left:max(var(--sm),env(safe-area-inset-left));padding-right:max(var(--sm),env(safe-area-inset-right));}
+      footer{padding-bottom:max(var(--lg),calc(env(safe-area-inset-bottom) + var(--lg)));}
+    }
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}
+      .hero-img{opacity:1;}
+      .sig-stroke{stroke-dashoffset:0;opacity:1;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <img class="hero-img" src="assets/hero-photo.jpg" alt="Rayhan Ahmed"/>
+  <div class="ptcls" id="ptcls"></div>
+</section>
+
+<!-- ── WRITINGS ── -->
+<section id="writings">
+  <div class="inner">
+    <div class="sh reveal"><h2 class="st">Writings</h2></div>
+    <div class="sl"></div>
+    <div class="grid" id="wGrid">
+      <div class="empty">
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14,2 14,8 20,8"/>
+        </svg>
+        <p>No writings yet — add posts via the admin panel.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── VISUAL STORYTELLING ── -->
+<section id="media">
+  <div class="inner">
+    <div class="sh reveal"><h2 class="st">Visual Storytelling</h2></div>
+    <div class="sl"></div>
+    <div class="tabs reveal" id="mTabs">
+      <button class="tab active" data-f="all">All</button>
+      <button class="tab" data-f="Image">Image</button>
+      <button class="tab" data-f="Video">Video</button>
+      <button class="tab" data-f="Audio">Audio</button>
+    </div>
+    <div class="grid" id="mGrid">
+      <div class="empty">
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/>
+          <polyline points="21,15 16,10 5,21"/>
+        </svg>
+        <p>No media yet — add items via the admin panel.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="inner">
+    <div class="sh reveal"><h2 class="st">Let&rsquo;s Connect</h2></div>
+    <div class="sl"></div>
+    <div class="fw reveal">
+      <div class="fg">
+        <label class="fl">Full Name</label>
+        <input class="fi" id="fn" type="text" placeholder="Last, First" autocomplete="name"/>
+      </div>
+      <div class="fg">
+        <label class="fl">Email Address</label>
+        <input class="fi" id="fe" type="email" placeholder="name@email.com" autocomplete="email"/>
+      </div>
+      <div class="fg">
+        <label class="fl">Subject</label>
+        <input class="fi" id="fs" type="text" placeholder="What's on your mind?"/>
+      </div>
+      <div class="fg">
+        <label class="fl">Message</label>
+        <textarea class="ft" id="fm" placeholder="Tell me more about it..."></textarea>
+      </div>
+      <div id="fmsg"></div>
+      <button class="fbtn" id="fbtn" onclick="sendMsg()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="22" y1="2" x2="11" y2="13"/>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+        </svg>
+        Send Message
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="streak"></div>
+  <svg class="sig" viewBox="0 0 520 100" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="sg" x="-10%" y="-60%" width="120%" height="220%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="1.2" result="b1"/>
+        <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="b2"/>
+        <feColorMatrix in="b2" type="matrix" values="0.1 0 0 0 0.04  0.2 0 0 0 0.3  0.6 0 0 0 0.85  0 0 0 0.3 0" result="glow"/>
+        <feMerge><feMergeNode in="glow"/><feMergeNode in="b1"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+    <text class="sig-fill" x="50%" y="74" text-anchor="middle">Rayhan Ahmed</text>
+    <text class="sig-stroke" x="50%" y="74" text-anchor="middle">Rayhan Ahmed</text>
+    <circle class="sig-nib" cx="50" cy="74" r="2.8"/>
+  </svg>
+  <div class="gpool"></div>
+  <p class="copy">&copy; All rights reserved</p>
+</footer>
+
+<!-- ── MODAL ── -->
+<div class="mo" id="modal" onclick="closeM(event)">
+  <div class="mb">
+    <button class="mc-close" onclick="closeM(null,true)">&#x2715;</button>
+    <h2 class="mtitle" id="mtitle"></h2>
+    <div class="mmeta" id="mmeta"></div>
+    <div class="mbody" id="mbody"></div>
+  </div>
+</div>
+
+<script>
+/* ─── CONFIG ─────────────────────────────────────────
+   After deployment paste your fine-grained GitHub token here.
+   Needs Issues: Read & write on repo rriyad/rayhanahmed
+──────────────────────────────────────────────────── */
+var REPO  = 'rriyad/rayhanahmed';
+var TOKEN = '';
+
+/* ─── PARTICLES ──────────────────────────────────── */
+(function(){
+  var wrap = document.getElementById('ptcls');
+  var n = window.innerWidth < 600 ? 18 : 35;
+  for(var i = 0; i < n; i++){
+    var s = document.createElement('span');
+    var sz = 1 + Math.random() * 1.5;
+    s.style.cssText =
+      'left:'  + (Math.random()*100) + '%;' +
+      'top:'   + (Math.random()*100) + '%;' +
+      'width:' + sz + 'px;height:' + sz + 'px;' +
+      'animation-duration:'  + (8  + Math.random()*14) + 's;' +
+      'animation-delay:'     + (Math.random()*10) + 's;';
+    wrap.appendChild(s);
+  }
+})();
+
+/* ─── SCROLL REVEAL ──────────────────────────────── */
+var obs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }
+  });
+}, {threshold: 0.08, rootMargin: '0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+
+/* ─── HELPERS ────────────────────────────────────── */
+function esc(s){
+  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function mdToHtml(text){
+  if(!text) return '';
+  var html = text
+    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+    .replace(/^## (.+)$/gm,  '<h2>$1</h2>')
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*([^*]+)\*/g,     '<em>$1</em>');
+  return html.split(/\n{2,}/).map(function(b){
+    b = b.trim();
+    if(!b) return '';
+    if(b.charAt(0) === '<') return b;
+    return '<p>' + b + '</p>';
+  }).filter(Boolean).join('');
+}
+
+function parseFM(raw){
+  var parts = raw.split('---');
+  if(parts.length < 3) return {body: raw.trim()};
+  var meta = {};
+  parts[1].split('\n').forEach(function(line){
+    var ci = line.indexOf(':');
+    if(ci > 0){
+      var k = line.slice(0, ci).trim();
+      var v = line.slice(ci + 1).trim().replace(/^['"]|['"]$/g, '');
+      if(k) meta[k] = v;
+    }
+  });
+  meta.body = parts.slice(2).join('---').trim();
+  return meta;
+}
+
+/* ─── GITHUB API ─────────────────────────────────── */
+async function getDir(path){
+  var url  = 'https://api.github.com/repos/' + REPO + '/contents/' + path;
+  var opts = TOKEN ? {headers: {Authorization: 'token ' + TOKEN}} : {};
+  try {
+    var r = await fetch(url, opts);
+    if(!r.ok) return [];
+    return r.json();
+  } catch(e){ return []; }
+}
+
+async function getFile(url){
+  var r = await fetch(url);
+  return r.text();
+}
+
+/* ─── WRITINGS ───────────────────────────────────── */
+var posts = [];
+
+async function loadWritings(){
+  var grid  = document.getElementById('wGrid');
+  var files = await getDir('content/writings');
+  var mds   = files.filter(function(f){ return f.name.endsWith('.md') && !f.name.startsWith('.'); });
+  if(!mds.length) return;
+
+  var loaded = await Promise.all(mds.map(async function(f){
+    var t = await getFile(f.download_url);
+    return parseFM(t);
+  }));
+  loaded.sort(function(a, b){ return new Date(b.date || 0) - new Date(a.date || 0); });
+  posts = loaded;
+
+  grid.innerHTML = posts.map(function(p, i){
+    var thumb = p.cover
+      ? '<img class="wc-img" src="' + esc(p.cover) + '" alt="' + esc(p.title) + '" loading="lazy" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'block\'">'
+      : '';
+    var ph = '<div class="wc-ph"' + (p.cover ? ' style="display:none"' : '') + '></div>';
+    return '<div class="wc reveal" style="transition-delay:' + (i * 0.08) + 's" onclick="openPost(' + i + ')">'
+      + thumb + ph
+      + '<div class="wc-body">'
+      + '<h3 class="wc-title">' + esc(p.title) + '</h3>'
+      + '<p class="wc-exc">'   + esc(p.excerpt) + '</p>'
+      + '<div class="wc-meta">'
+      + (p.readTime ? '<span>' + esc(p.readTime) + '</span><span>\u00b7</span>' : '')
+      + '<span>' + esc(p.date) + '</span>'
+      + '</div></div></div>';
+  }).join('');
+
+  grid.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+}
+
+/* ─── MEDIA ──────────────────────────────────────── */
+var media = [];
+
+async function loadMedia(){
+  var files = await getDir('content/media');
+  var mds   = files.filter(function(f){ return f.name.endsWith('.md') && !f.name.startsWith('.'); });
+  if(!mds.length) return;
+
+  var loaded = await Promise.all(mds.map(async function(f){
+    var t = await getFile(f.download_url);
+    return parseFM(t);
+  }));
+  loaded.sort(function(a, b){ return new Date(b.date || 0) - new Date(a.date || 0); });
+  media = loaded;
+  renderMedia('all');
+}
+
+function renderMedia(filter){
+  var grid = document.getElementById('mGrid');
+  var list = filter === 'all'
+    ? media
+    : media.filter(function(m){ return (m.type || '').toLowerCase() === filter.toLowerCase(); });
+
+  if(!list.length){
+    var label = filter === 'all' ? '' : filter + ' ';
+    grid.innerHTML = '<div class="empty">'
+      + '<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">'
+      + '<rect x="3" y="3" width="18" height="18" rx="2"/>'
+      + '<circle cx="8.5" cy="8.5" r="1.5"/>'
+      + '<polyline points="21,15 16,10 5,21"/>'
+      + '</svg>'
+      + '<p>No ' + label + 'items yet.</p></div>';
+    return;
+  }
+
+  grid.innerHTML = list.map(function(m, i){
+    var idx   = media.indexOf(m);
+    var thumb = m.cover
+      ? '<img class="mc-img" src="' + esc(m.cover) + '" alt="' + esc(m.title) + '" loading="lazy" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'block\'">'
+      : '';
+    var ph = '<div class="mc-ph"' + (m.cover ? ' style="display:none"' : '') + '></div>';
+    return '<div class="mc reveal" style="transition-delay:' + (i * 0.08) + 's" onclick="openMedia(' + idx + ')">'
+      + thumb + ph
+      + '<div class="mc-ov">'
+      + '<div class="mc-title">' + esc(m.title) + '</div>'
+      + '</div>'
+      + '</div>';
+  }).join('');
+
+  grid.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+}
+
+/* ─── FILTER TABS ────────────────────────────────── */
+document.getElementById('mTabs').addEventListener('click', function(e){
+  var t = e.target.closest('.tab');
+  if(!t) return;
+  document.querySelectorAll('#mTabs .tab').forEach(function(x){ x.classList.remove('active'); });
+  t.classList.add('active');
+  renderMedia(t.dataset.f);
+});
+
+/* ─── MODAL: OPEN WRITING ────────────────────────── */
+function openPost(idx){
+  var p = posts[idx];
+  if(!p) return;
+  document.getElementById('mtitle').textContent = p.title  || '';
+  document.getElementById('mmeta').textContent  = [p.readTime, p.date].filter(Boolean).join(' \u00b7 ');
+  document.getElementById('mbody').innerHTML    = mdToHtml(p.body);
+  openMod();
+}
+
+/* ─── MODAL: OPEN MEDIA ──────────────────────────── */
+function openMedia(idx){
+  var m = media[idx];
+  if(!m) return;
+  document.getElementById('mtitle').textContent = m.title       || '';
+  document.getElementById('mmeta').textContent  = m.date        || '';
+  document.getElementById('mbody').innerHTML    = m.description ? '<p>' + esc(m.description) + '</p>' : '';
+  openMod();
+}
+
+/* ─── MODAL HELPERS ──────────────────────────────── */
+function openMod(){
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeM(e, force){
+  if(!force && e && e.target !== document.getElementById('modal')) return;
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeM(null, true); });
+
+/* ─── CONTACT FORM ───────────────────────────────── */
+async function sendMsg(){
+  var btn   = document.getElementById('fbtn');
+  var msgEl = document.getElementById('fmsg');
+  var name  = document.getElementById('fn').value.trim();
+  var email = document.getElementById('fe').value.trim();
+  var subj  = document.getElementById('fs').value.trim();
+  var msg   = document.getElementById('fm').value.trim();
+
+  msgEl.innerHTML = '';
+
+  if(!name || !email || !msg){
+    msgEl.innerHTML = '<div class="fmsg err">Please fill in Name, Email and Message.</div>';
+    return;
+  }
+  if(!TOKEN){
+    msgEl.innerHTML = '<div class="fmsg err">Contact form not yet configured — add your GitHub token after deployment.</div>';
+    return;
+  }
+
+  btn.textContent = 'Sending\u2026';
+  btn.disabled    = true;
+
+  try {
+    var res = await fetch('https://api.github.com/repos/' + REPO + '/issues', {
+      method:  'POST',
+      headers: {Authorization: 'token ' + TOKEN, 'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        title:  '[Contact] ' + (subj || 'New message') + ' \u2014 ' + name,
+        body:   '**Name:** '  + name + '\n**Email:** ' + email + '\n\n' + msg,
+        labels: ['contact']
+      })
+    });
+    if(res.ok){
+      document.querySelector('.fw').innerHTML =
+        '<div style="text-align:center;padding:48px 20px">' +
+        '<p class="fmsg ok" style="font-size:1.1rem">Message sent \u2014 thank you, ' + esc(name) + '!</p>' +
+        '</div>';
+    } else {
+      throw new Error(res.status);
+    }
+  } catch(err){
+    btn.textContent = 'Send Message';
+    btn.disabled    = false;
+    msgEl.innerHTML = '<div class="fmsg err">Something went wrong. Please try again.</div>';
+  }
+}
+
+/* ─── SIGNATURE PEN NIB ──────────────────────────── */
+(function(){
+  var stroke = document.querySelector('.sig-stroke');
+  var nib    = document.querySelector('.sig-nib');
+  if(!stroke || !nib) return;
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  var DUR = 3800, DELAY = 500, WPC = 0.68, origin = null;
+  function tick(ts){
+    if(!origin) origin = ts + DELAY;
+    var elapsed = ts - origin;
+    if(elapsed < 0){ requestAnimationFrame(tick); return; }
+    var ct    = elapsed % DUR;
+    var prog  = Math.min(ct / (DUR * WPC), 1);
+    var phase = ct / DUR;
+    try {
+      var len = stroke.getComputedTextLength();
+      var pt  = stroke.getPointAtLength(len * prog);
+      nib.setAttribute('cx', pt.x);
+      nib.setAttribute('cy', pt.y);
+      nib.style.opacity = phase > 0.84 ? '0' : '1';
+    } catch(e){}
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
+
+/* ─── INIT ───────────────────────────────────────── */
+loadWritings();
+loadMedia();
+</script>
+</body>
+</html>
