@@ -497,11 +497,7 @@ async function sendMsg(){
     msgEl.innerHTML = '<div class="fmsg err">Please fill in Name, Email and Message.</div>';
     return;
   }
-  if(!TOKEN){
-    msgEl.innerHTML = '<div class="fmsg err">Contact form not yet configured — add your GitHub token after deployment.</div>';
-    return;
-  }
-btn.textContent = 'Sending…';
+  btn.textContent = 'Sending\u2026';
   btn.disabled    = true;
 
   try {
