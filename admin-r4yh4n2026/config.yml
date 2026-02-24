@@ -6,6 +6,7 @@
 
 backend:
   name: git-gateway
+  base_url: https://wonderful-taffy-153689.netlify.app
   branch: main
 
 media_folder: "assets/uploads"
