@@ -501,21 +501,23 @@ async function sendMsg(){
     msgEl.innerHTML = '<div class="fmsg err">Contact form not yet configured — add your GitHub token after deployment.</div>';
     return;
   }
-
-  btn.textContent = 'Sending\u2026';
+btn.textContent = 'Sending…';
   btn.disabled    = true;
 
   try {
-    var res = await fetch('https://api.github.com/repos/' + REPO + '/issues', {
+    var res = await fetch('https://api.web3forms.com/submit', {
       method:  'POST',
-      headers: {Authorization: 'token ' + TOKEN, 'Content-Type': 'application/json'},
+      headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
-        title:  '[Contact] ' + (subj || 'New message') + ' \u2014 ' + name,
-        body:   '**Name:** '  + name + '\n**Email:** ' + email + '\n\n' + msg,
-        labels: ['contact']
+        access_key: '40188c67-37cb-499b-ae52-c49a278e5af7',
+        name:    name,
+        email:   email,
+        subject: subj || 'New contact message',
+        message: msg
       })
     });
-    if(res.ok){
+    var data = await res.json();
+    if(data.success){
       document.querySelector('.fw').innerHTML =
         '<div style="text-align:center;padding:48px 20px">' +
         '<p class="fmsg ok" style="font-size:1.1rem">Message sent \u2014 thank you, ' + esc(name) + '!</p>' +
