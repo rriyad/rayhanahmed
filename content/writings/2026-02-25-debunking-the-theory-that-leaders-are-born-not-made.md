@@ -1,5 +1,5 @@
 ---
-title: Debunking the Theory That Leaders Are Born Not Made
+title: Debunking the Theory That Leaders Are Born Not Made.
 excerpt: Leadership is not something you are born with. It is built through
   growth, responsibility, and consistent action.
 readTime: 5 min read
