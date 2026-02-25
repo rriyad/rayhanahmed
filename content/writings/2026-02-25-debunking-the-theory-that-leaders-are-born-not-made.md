@@ -5,7 +5,6 @@ excerpt: Leadership is not something you are born with. It is built through
 readTime: 5 min read
 date: 2026-02-25
 ---
-\
 We hear it all the time.
 
 “She’s a natural leader.”
