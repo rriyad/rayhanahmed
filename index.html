@@ -55,7 +55,7 @@
     .tab.active{background:rgba(79,158,255,.12);border-color:var(--blue);color:#fff;box-shadow:0 0 14px rgba(79,158,255,.2);}
 
     /* ── GRID ── */
-    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:clamp(14px,2.5vw,24px);}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.5vw,24px);}
 
     /* ── WRITINGS ── */
     #writings{background:radial-gradient(ellipse 70% 50% at 10% 50%,rgba(10,30,100,.25) 0%,transparent 70%),var(--deep);}
@@ -144,7 +144,7 @@
       .fw,.mb{border-radius:14px;}
       .mb{padding:24px 18px;}
     }
-    @media(min-width:1400px){.grid{grid-template-columns:repeat(3,1fr);}}
+
     @supports(padding:max(0px)){
       .inner{padding-left:max(var(--sm),env(safe-area-inset-left));padding-right:max(var(--sm),env(safe-area-inset-right));}
       footer{padding-bottom:max(var(--lg),calc(env(safe-area-inset-bottom) + var(--lg)));}
@@ -177,6 +177,9 @@
         </svg>
         <p>No writings yet — add posts via the admin panel.</p>
       </div>
+    </div>
+    <div id="wPagination" style="text-align:center;margin-top:var(--md);display:none;">
+      <button class="tab" id="wViewAll" onclick="toggleAllWritings()" style="padding:10px 28px;font-size:.9rem;">View all writings</button>
     </div>
   </div>
 </section>
@@ -370,7 +373,22 @@ async function loadWritings(){
   loaded.sort(function(a, b){ return new Date(b.date || 0) - new Date(a.date || 0); });
   posts = loaded;
 
-  grid.innerHTML = posts.map(function(p, i){
+  renderWritings(false);
+}
+
+var showAllWritings = false;
+function toggleAllWritings(){
+  showAllWritings = !showAllWritings;
+  renderWritings(showAllWritings);
+}
+
+function renderWritings(showAll){
+  var grid = document.getElementById('wGrid');
+  var pag  = document.getElementById('wPagination');
+  var btn  = document.getElementById('wViewAll');
+  var list = showAll ? posts : posts.slice(0, 3);
+  if(posts.length > 3){ pag.style.display = 'block'; btn.textContent = showAll ? 'Show less' : 'View all writings (' + posts.length + ')'; }
+  grid.innerHTML = list.map(function(p, i){
     var thumb = p.cover
       ? '<img class="wc-img" src="' + esc(p.cover) + '" alt="' + esc(p.title) + '" loading="lazy" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'block\'">'
       : '';
@@ -408,9 +426,15 @@ async function loadMedia(){
 
 function renderMedia(filter){
   var grid = document.getElementById('mGrid');
-  var list = filter === 'all'
+  var allFiltered = filter === 'all'
     ? media
     : media.filter(function(m){ return (m.type || '').toLowerCase() === filter.toLowerCase(); });
+  var list = filter === 'all'
+    ? ['Image','Video','Audio'].reduce(function(acc, t){
+        var last = media.filter(function(m){ return (m.type||'').toLowerCase() === t.toLowerCase(); }).slice(0,1);
+        return acc.concat(last);
+      }, [])
+    : allFiltered.slice(0, 3);
 
   if(!list.length){
     var label = filter === 'all' ? '' : filter + ' ';
