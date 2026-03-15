@@ -40,7 +40,7 @@
     @keyframes floatUp{0%{opacity:0;transform:translateY(0) scale(1);}10%{opacity:.6;}90%{opacity:.3;}100%{opacity:0;transform:translateY(-120vh) scale(.3);}}
 
     /* ── SECTIONS ── */
-    section{padding:var(--xl) 0;position:relative;}
+    section{padding:var(--md) 0;position:relative;}
     .inner{max-width:1100px;margin:0 auto;padding:0 var(--sm);width:100%;}
     .sh{text-align:center;margin-bottom:var(--md);}
     .st{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:300;color:#fff;line-height:1.1;}
@@ -192,13 +192,8 @@
     #media{transform:translateZ(-40px);}
     #contact{transform:translateZ(-60px);}
     
-    /* Depth fog between sections */
-    section::before{
-      content:'';position:absolute;bottom:0;left:0;right:0;height:120px;
-      background:linear-gradient(to bottom,transparent,rgba(4,6,15,.6));
-      pointer-events:none;z-index:2;
-    }
-    #hero::before{display:none;}
+    /* No depth fog between sections */
+    section::before{display:none;}
     
     /* Glowing orbs floating in 3D space */
     .orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(80px);animation:orbFloat ease-in-out infinite;}
