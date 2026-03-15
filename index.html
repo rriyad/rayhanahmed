@@ -154,14 +154,133 @@
       .hero-img{opacity:1;}
       .sig-stroke{stroke-dashoffset:0;opacity:1;}
     }
+
+    /* ── THINGS I BUILT ── */
+    #built{background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(10,30,100,.15) 0%,transparent 70%),var(--navy);}
+    .proj-list{display:flex;flex-direction:column;}
+    .proj{position:relative;display:flex;flex-wrap:wrap;align-items:baseline;gap:0 clamp(24px,4vw,48px);padding:clamp(24px,4vw,40px) 0;border-bottom:1px solid rgba(79,158,255,.08);transition:border-color .4s;}
+    .proj:first-child{border-top:1px solid rgba(79,158,255,.08);}
+    .proj::before{content:'';position:absolute;bottom:-1px;left:0;width:0;height:1px;background:linear-gradient(to right,var(--blue2),transparent);transition:width .6s cubic-bezier(.4,0,.2,1);}
+    .proj:hover::before{width:60%;}
+    .proj-info{flex:1;min-width:220px;}
+    .proj-name{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:300;color:#fff;text-decoration:none;line-height:1.1;letter-spacing:-.01em;transition:color .3s,letter-spacing .3s;}
+    .proj-name:hover{color:var(--accent);letter-spacing:.01em;}
+    .proj-tag{display:block;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#3a5070;margin-top:8px;font-weight:400;}
+    .proj-btns{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding-top:2px;}
+    .proj-btn{display:inline-flex;align-items:center;gap:5px;padding:6px 16px;border-radius:100px;border:1px solid rgba(79,158,255,.15);background:transparent;color:#5a7a9a;font-family:'DM Sans',sans-serif;font-size:.72rem;letter-spacing:.06em;text-decoration:none;transition:all .3s;white-space:nowrap;}
+    .proj-btn:hover{border-color:rgba(79,158,255,.5);color:var(--accent);background:rgba(79,158,255,.05);}
+    .proj-btn.primary{color:var(--accent);border-color:rgba(79,158,255,.3);}
+    .proj-btn.primary:hover{border-color:var(--blue);color:#fff;background:rgba(79,158,255,.08);box-shadow:0 0 20px rgba(79,158,255,.1);}
+    @media(max-width:599px){.proj{flex-direction:column;gap:16px;}.proj-btns{padding-top:0;}}
+
+    /* ── 3D SPACE SCENE ── */
+    #space-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+    body{perspective:1200px;perspective-origin:50% 40%;}
+    section{position:relative;z-index:1;transform-style:preserve-3d;}
+    
+    /* 3D card tilt effect */
+    .wc,.mc{transform-style:preserve-3d;transition:transform .4s ease,box-shadow .4s ease;}
+    .wc:hover,.mc:hover{
+      transform:rotateY(-6deg) rotateX(4deg) translateZ(20px) scale(1.03);
+      box-shadow:12px 20px 60px rgba(0,0,30,.7), 0 0 30px rgba(79,158,255,.15);
+    }
+    
+    /* Floating depth layers on scroll */
+    #hero{transform:translateZ(0px);}
+    #built{transform:translateZ(-10px);}
+    #writings{transform:translateZ(-20px);}
+    #media{transform:translateZ(-40px);}
+    #contact{transform:translateZ(-60px);}
+    
+    /* Depth fog between sections */
+    section::before{
+      content:'';position:absolute;bottom:0;left:0;right:0;height:120px;
+      background:linear-gradient(to bottom,transparent,rgba(4,6,15,.6));
+      pointer-events:none;z-index:2;
+    }
+    #hero::before{display:none;}
+    
+    /* Glowing orbs floating in 3D space */
+    .orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(80px);animation:orbFloat ease-in-out infinite;}
+    .orb1{width:400px;height:400px;background:radial-gradient(circle,rgba(37,99,235,.18),transparent 70%);top:10%;left:-10%;animation-duration:18s;}
+    .orb2{width:300px;height:300px;background:radial-gradient(circle,rgba(79,158,255,.12),transparent 70%);top:50%;right:-8%;animation-duration:24s;animation-delay:-8s;}
+    .orb3{width:250px;height:250px;background:radial-gradient(circle,rgba(165,200,255,.1),transparent 70%);bottom:20%;left:30%;animation-duration:20s;animation-delay:-4s;}
+    
+    @keyframes orbFloat{
+      0%,100%{transform:translateY(0) translateX(0) translateZ(0);}
+      33%{transform:translateY(-40px) translateX(20px) translateZ(30px);}
+      66%{transform:translateY(20px) translateX(-15px) translateZ(-20px);}
+    }
+    
+    /* Section headings float up in 3D */
+    .sh{transform:translateZ(30px);}
+    
+    /* Nebula overlay */
+    #nebula{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.4;
+      background:
+        radial-gradient(ellipse 60% 40% at 20% 30%,rgba(37,99,235,.08),transparent),
+        radial-gradient(ellipse 50% 60% at 80% 70%,rgba(79,158,255,.06),transparent),
+        radial-gradient(ellipse 80% 30% at 50% 100%,rgba(10,18,48,.8),transparent);
+    }
+
   </style>
 </head>
 <body>
+<canvas id="space-canvas"></canvas>
+<div id="nebula"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
 
 <!-- ── HERO ── -->
 <section id="hero">
   <img class="hero-img" src="assets/hero-photo.jpg" alt="Rayhan Ahmed"/>
   <div class="ptcls" id="ptcls"></div>
+</section>
+
+<!-- ── THINGS I BUILT ── -->
+<section id="built">
+  <div class="inner">
+    <div class="sh reveal"><h2 class="st">Things I Built</h2></div>
+    <div class="sl"></div>
+    <div class="proj-list">
+
+      <!-- PROJECT: ResearchForge
+           To add buttons, fill in the href="" values below.
+           Delete any <a> tag whose link does not exist yet. -->
+      <div class="proj reveal">
+        <div class="proj-info">
+          <a class="proj-name" href="https://profile-app.rayhanahmed61996.workers.dev" target="_blank" rel="noopener">ProFile</a>
+          <div class="proj-tag">Resume &middot; CV &middot; Cover Letter</div>
+        </div>
+        <div class="proj-btns">
+          <a class="proj-btn primary" href="https://profile-app.rayhanahmed61996.workers.dev" target="_blank" rel="noopener">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Open Web App
+          </a>
+        </div>
+      </div>
+
+      <!-- PROJECT: Template — duplicate this block to add more projects
+      <div class="proj reveal">
+        <div class="proj-info">
+          <a class="proj-name" href="TITLE-LINK" target="_blank" rel="noopener">Project Name</a>
+          <div class="proj-tag">Category</div>
+        </div>
+        <div class="proj-btns">
+          <a class="proj-btn primary" href="WEB-APP-LINK" target="_blank" rel="noopener">Open Web App</a>
+          <a class="proj-btn" href="GITHUB-LINK" target="_blank" rel="noopener">View on GitHub</a>
+          <a class="proj-btn" href="PLAYSTORE-LINK" target="_blank" rel="noopener">Get it on Google Play</a>
+          <a class="proj-btn" href="APPSTORE-LINK" target="_blank" rel="noopener">Download on App Store</a>
+          <a class="proj-btn" href="DEMO-LINK" target="_blank" rel="noopener">View Demo</a>
+          <a class="proj-btn" href="DOCS-LINK" target="_blank" rel="noopener">Documentation</a>
+          <a class="proj-btn" href="WEBSITE-LINK" target="_blank" rel="noopener">Visit Website</a>
+        </div>
+      </div>
+      -->
+
+    </div>
+  </div>
 </section>
 
 <!-- ── WRITINGS ── -->
@@ -583,4 +702,144 @@ loadWritings();
 loadMedia();
 </script>
 </body>
+
+<script>
+/* ── 3D STARFIELD ── */
+(function(){
+  var canvas = document.getElementById('space-canvas');
+  var ctx = canvas.getContext('2d');
+  var W, H, stars = [];
+  var STAR_COUNT = 220;
+  var mouseX = 0, mouseY = 0;
+
+  function resize(){
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  function initStars(){
+    stars = [];
+    for(var i = 0; i < STAR_COUNT; i++){
+      stars.push({
+        x: (Math.random() - 0.5) * W * 3,
+        y: (Math.random() - 0.5) * H * 3,
+        z: Math.random() * W,
+        pz: 0,
+        size: Math.random() * 1.5 + 0.3,
+        brightness: Math.random() * 0.7 + 0.3,
+        twinkle: Math.random() * Math.PI * 2
+      });
+    }
+  }
+
+  var scrollY = 0;
+  window.addEventListener('scroll', function(){ scrollY = window.scrollY; });
+  window.addEventListener('mousemove', function(e){
+    mouseX = (e.clientX / W - 0.5) * 2;
+    mouseY = (e.clientY / H - 0.5) * 2;
+  });
+
+  var speed = 0.4;
+  function draw(){
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = 'rgba(4,6,15,0)';
+    ctx.fillRect(0, 0, W, H);
+
+    var cx = W / 2 + mouseX * 30;
+    var cy = H / 2 + mouseY * 20;
+
+    stars.forEach(function(s){
+      s.z -= speed + scrollY * 0.0005;
+      s.twinkle += 0.02;
+      if(s.z <= 0) s.z = W;
+
+      var k = 128 / s.z;
+      var sx = (s.x * k) + cx;
+      var sy = (s.y * k) + cy;
+
+      if(sx < 0 || sx > W || sy < 0 || sy > H){
+        s.z = W;
+        s.x = (Math.random() - 0.5) * W * 3;
+        s.y = (Math.random() - 0.5) * H * 3;
+        return;
+      }
+
+      var size = s.size * (1 - s.z / W) * 3;
+      var alpha = (1 - s.z / W) * s.brightness * (0.7 + 0.3 * Math.sin(s.twinkle));
+
+      // Draw star with glow
+      var depth = 1 - s.z / W;
+      var r = Math.floor(79 + depth * 100);
+      var g = Math.floor(158 + depth * 60);
+      var b = 255;
+
+      if(size > 1.2){
+        var grd = ctx.createRadialGradient(sx, sy, 0, sx, sy, size * 3);
+        grd.addColorStop(0, 'rgba(' + r + ',' + g + ',' + b + ',' + alpha + ')');
+        grd.addColorStop(1, 'rgba(' + r + ',' + g + ',' + b + ',0)');
+        ctx.beginPath();
+        ctx.arc(sx, sy, size * 3, 0, Math.PI * 2);
+        ctx.fillStyle = grd;
+        ctx.fill();
+      }
+
+      ctx.beginPath();
+      ctx.arc(sx, sy, size, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + (alpha + 0.2) + ')';
+      ctx.fill();
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  initStars();
+  draw();
+  window.addEventListener('resize', function(){ resize(); initStars(); });
+})();
+
+/* ── 3D MOUSE PARALLAX ON SECTIONS ── */
+(function(){
+  var sections = document.querySelectorAll('section');
+  var targetX = 0, targetY = 0, currentX = 0, currentY = 0;
+
+  window.addEventListener('mousemove', function(e){
+    targetX = (e.clientX / window.innerWidth - 0.5) * 6;
+    targetY = (e.clientY / window.innerHeight - 0.5) * 4;
+  });
+
+  function animate(){
+    currentX += (targetX - currentX) * 0.05;
+    currentY += (targetY - currentY) * 0.05;
+    sections.forEach(function(s, i){
+      var depth = (i + 1) * 0.5;
+      s.style.transform = 'rotateY(' + (currentX * depth * 0.3) + 'deg) rotateX(' + (-currentY * depth * 0.2) + 'deg) translateZ(' + (-i * 20) + 'px)';
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  /* 3D card tilt on mouse move */
+  document.addEventListener('mousemove', function(e){
+    document.querySelectorAll('.wc,.mc').forEach(function(card){
+      var rect = card.getBoundingClientRect();
+      var cx = rect.left + rect.width / 2;
+      var cy = rect.top + rect.height / 2;
+      var dx = (e.clientX - cx) / (rect.width / 2);
+      var dy = (e.clientY - cy) / (rect.height / 2);
+      var dist = Math.sqrt(dx*dx + dy*dy);
+      if(dist < 2){
+        card.style.transform = 'rotateY(' + (dx * 8) + 'deg) rotateX(' + (-dy * 6) + 'deg) translateZ(20px) scale(1.03)';
+      }
+    });
+  });
+
+  document.addEventListener('mouseleave', function(){
+    document.querySelectorAll('.wc,.mc').forEach(function(card){
+      card.style.transform = '';
+    });
+  });
+})();
+</script>
+
 </html>
