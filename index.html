@@ -394,12 +394,15 @@ function parseFM(raw){
   var parts = raw.split('---');
   if(parts.length < 3) return {body: raw.trim()};
   var meta = {};
+  var lastKey = null;
   parts[1].split('\n').forEach(function(line){
     var ci = line.indexOf(':');
-    if(ci > 0){
+    if(ci > 0 && !/^\s/.test(line)){
       var k = line.slice(0, ci).trim();
       var v = line.slice(ci + 1).trim().replace(/^['"]|['"]$/g, '');
-      if(k) meta[k] = v;
+      if(k){ meta[k] = v; lastKey = k; }
+    } else if(lastKey && /^\s+/.test(line) && line.trim()){
+      meta[lastKey] += ' ' + line.trim();
     }
   });
   meta.body = parts.slice(2).join('---').trim();
@@ -418,8 +421,11 @@ async function getDir(path){
 }
 
 async function getFile(url){
-  var r = await fetch(url);
-  return r.text();
+  try {
+    var r = await fetch(url);
+    if(!r.ok) return '';
+    return r.text();
+  } catch(e){ return ''; }
 }
 
 /* ─── WRITINGS ───────────────────────────────────── */
@@ -494,12 +500,7 @@ function renderMedia(filter){
   var allFiltered = filter === 'all'
     ? media
     : media.filter(function(m){ return (m.type || '').toLowerCase() === filter.toLowerCase(); });
-  var list = filter === 'all'
-    ? ['Image','Video','Audio'].reduce(function(acc, t){
-        var last = media.filter(function(m){ return (m.type||'').toLowerCase() === t.toLowerCase(); }).slice(0,1);
-        return acc.concat(last);
-      }, [])
-    : allFiltered.slice(0, 3);
+  var list = filter === 'all' ? media : allFiltered.slice(0, 3);
 
   if(!list.length){
     var label = filter === 'all' ? '' : filter + ' ';
@@ -586,8 +587,9 @@ async function sendMsg(){
     msgEl.innerHTML = '<div class="fmsg err">Please fill in Name, Email and Message.</div>';
     return;
   }
-  btn.textContent = 'Sending\u2026';
-  btn.disabled    = true;
+  var origBtnHtml = btn.innerHTML;
+  btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Sending\u2026';
+  btn.disabled  = true;
 
   try {
     var res = await fetch('https://api.web3forms.com/submit', {
@@ -611,8 +613,8 @@ async function sendMsg(){
       throw new Error(res.status);
     }
   } catch(err){
-    btn.textContent = 'Send Message';
-    btn.disabled    = false;
+    btn.innerHTML = origBtnHtml;
+    btn.disabled  = false;
     msgEl.innerHTML = '<div class="fmsg err">Something went wrong. Please try again.</div>';
   }
 }
