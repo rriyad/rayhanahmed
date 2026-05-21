@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rayhan Ahmed — Communication Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root {
+  --navy:     #1B3054;
+  --navy-mid: #2A4A7F;
+  --ink:      #18181B;
+  --mid:      #52525B;
+  --muted:    #A1A1AA;
+  --gold:     #B07D2A;
+  --gold-bg:  #FDF4E3;
+  --bg:       #F7F5F1;
+  --surface:  #FFFFFF;
+  --border:   #E4E0D8;
+  --border-s: #D4CFC6;
+
+  --display: 'Cormorant Garamond', Georgia, serif;
+  --body:    'Outfit', system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { font-family: var(--body); background: var(--bg); color: var(--ink); line-height: 1.7; min-width: 320px; }
+a { color: inherit; text-decoration: none; }
+
+.w { width: min(900px, 100% - clamp(28px, 5vw, 72px) * 2); margin-inline: auto; }
+
+/* ── HERO ── */
+.hero {
+  background: var(--navy);
+  padding: clamp(44px, 8vw, 80px) 0 0;
+}
+
+.hero-inner { }
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.hero-eyebrow span {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #8FAFC8;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: #4A7A9B;
+  flex-shrink: 0;
+}
+
+.hero-name {
+  font-family: var(--display);
+  font-size: clamp(52px, 11vw, 118px);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -1.5px;
+  color: #EEE8DE;
+  margin-bottom: clamp(28px, 4vw, 44px);
+}
+
+.hero-name em {
+  font-style: italic;
+  font-weight: 400;
+  color: #C8B98A;
+  display: block;
+}
+
+.hero-bottom {
+  border-top: 1px solid #2E4A6A;
+  padding: clamp(20px, 3vw, 28px) 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.hero-tagline {
+  font-family: var(--display);
+  font-size: clamp(15px, 2.5vw, 20px);
+  font-style: italic;
+  color: #8FAFC8;
+  font-weight: 400;
+  max-width: 420px;
+  line-height: 1.5;
+}
+
+.hero-links { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.hero-link {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  color: #C8D8E8;
+  padding: 8px 16px;
+  border: 1px solid #2E4A6A;
+  border-radius: 3px;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.hero-link:hover { background: rgba(255,255,255,0.06); border-color: #4A6A8A; }
+
+/* ── CHIPS ── */
+.chips-bar {
+  background: #152540;
+  border-top: 1px solid #2E4A6A;
+  padding: 14px 0;
+}
+
+.chips-inner {
+  width: min(900px, 100% - clamp(28px, 5vw, 72px) * 2);
+  margin-inline: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.chip {
+  font-size: 11px;
+  font-weight: 500;
+  color: #8FAFC8;
+  padding: 4px 12px;
+  border: 1px solid #2E4A6A;
+  border-radius: 2px;
+  letter-spacing: 0.3px;
+}
+
+/* ── SPEC BAR ── */
+.spec-bar {
+  background: var(--gold-bg);
+  border-bottom: 1px solid #E8D8B0;
+  padding: 11px 0;
+}
+
+.spec-bar-inner {
+  width: min(900px, 100% - clamp(28px, 5vw, 72px) * 2);
+  margin-inline: auto;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.spec-bar p { font-size: 12px; color: #7A5C18; line-height: 1.6; }
+.spec-bar strong { font-weight: 600; color: #5A3E08; }
+
+.spec-dot {
+  width: 5px; height: 5px;
+  background: var(--gold);
+  border-radius: 50%;
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+
+/* ── NAV ── */
+.topnav {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  box-shadow: 0 1px 0 var(--border);
+}
+
+.topnav-inner {
+  width: min(900px, 100% - clamp(28px, 5vw, 72px) * 2);
+  margin-inline: auto;
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.topnav-inner::-webkit-scrollbar { display: none; }
+
+.topnav a {
+  flex-shrink: 0;
+  display: block;
+  padding: 15px clamp(10px, 2vw, 18px);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.topnav a:hover { color: var(--navy); }
+.topnav a.on { color: var(--navy); border-bottom-color: var(--navy); }
+
+/* ── SECTIONS ── */
+main { padding-bottom: clamp(80px, 12vw, 140px); }
+
+.s {
+  padding-top: clamp(60px, 9vw, 96px);
+  scroll-margin-top: 52px;
+}
+
+.s-num {
+  font-family: var(--display);
+  font-size: clamp(48px, 9vw, 88px);
+  font-weight: 700;
+  color: var(--border);
+  line-height: 1;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.s-head { display: flex; align-items: baseline; gap: clamp(10px, 2vw, 18px); margin-bottom: 10px; }
+.s-titles { flex: 1; min-width: 0; }
+
+.s-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 3px;
+}
+
+.s-title {
+  font-family: var(--display);
+  font-size: clamp(22px, 4vw, 36px);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.1;
+}
+
+.s-rule { height: 1px; background: var(--border); margin: 12px 0 18px; }
+
+.s-desc {
+  font-size: clamp(13px, 2vw, 15px);
+  font-weight: 300;
+  color: var(--mid);
+  max-width: 600px;
+  line-height: 1.9;
+  margin-bottom: 32px;
+}
+
+.s-desc em { color: var(--muted); font-style: normal; }
+
+/* ── TILES ── */
+.tile {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--navy);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 18px;
+  transition: box-shadow 0.2s;
+}
+
+.tile:hover { box-shadow: 0 4px 20px rgba(27,48,84,0.08); }
+
+.tile-head {
+  padding: clamp(16px, 3vw, 22px) clamp(16px, 3vw, 24px) 14px;
+  border-bottom: 1px solid var(--border);
+  background: #FAFAF8;
+}
+
+.tile-type {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 5px;
+}
+
+.tile-name {
+  font-family: var(--display);
+  font-size: clamp(17px, 3vw, 21px);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.25;
+}
+
+.tile-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+.tile-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+
+.ttag {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--navy-mid);
+  background: #EDF2FA;
+  padding: 3px 10px;
+  border-radius: 2px;
+  border: 1px solid #C8D4E8;
+  letter-spacing: 0.3px;
+}
+
+.tile-body { padding: clamp(16px, 3vw, 24px); }
+
+/* ── EMAIL ── */
+.email-mock {
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+  font-size: clamp(13px, 2vw, 14px);
+}
+
+.email-chrome {
+  background: #F0EDE8;
+  padding: 9px 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-bottom: 1px solid var(--border);
+}
+
+.dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.dot-r { background: #FF5F57; }
+.dot-y { background: #FEBC2E; }
+.dot-g { background: #28C840; }
+
+.email-fields {
+  background: #FAFAF8;
+  border-bottom: 1px solid var(--border);
+  padding: 12px 16px;
+}
+
+.ef { display: flex; gap: 10px; font-size: 12px; line-height: 1.7; }
+.ef-l { color: var(--muted); font-weight: 600; min-width: 52px; flex-shrink: 0; }
+.ef-v { color: var(--mid); }
+
+.email-body {
+  padding: 18px 16px;
+  line-height: 1.9;
+  color: var(--ink);
+  font-size: clamp(13px, 2vw, 14px);
+  background: var(--surface);
+}
+
+.email-body p { margin-bottom: 11px; }
+.email-body p:last-child { margin-bottom: 0; }
+
+/* ── BRAND MESSAGING ── */
+.bm { margin-bottom: 22px; }
+
+.bm-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.bm p { font-size: clamp(13px, 2vw, 14px); color: var(--ink); line-height: 1.85; }
+
+.bm ul { list-style: none; }
+
+.bm ul li {
+  font-size: clamp(13px, 2vw, 14px);
+  color: var(--mid);
+  padding: 8px 0 8px 18px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  line-height: 1.7;
+}
+
+.bm ul li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 17px;
+  width: 8px; height: 1px;
+  background: var(--navy);
+}
+
+/* ── PRESS RELEASE ── */
+.pr-slug {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.pr-hed {
+  font-family: var(--display);
+  font-size: clamp(19px, 3.5vw, 25px);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.25;
+  margin-bottom: 6px;
+}
+
+.pr-deck {
+  font-size: clamp(13px, 2vw, 15px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--mid);
+  margin-bottom: 18px;
+  line-height: 1.8;
+}
+
+.pr-body p {
+  font-size: clamp(13px, 2vw, 14px);
+  color: var(--ink);
+  line-height: 1.9;
+  margin-bottom: 14px;
+}
+
+.pr-pull {
+  border-left: 2px solid var(--navy);
+  padding: 12px 20px;
+  margin: 20px 0;
+  color: var(--navy);
+  font-family: var(--display);
+  font-style: italic;
+  font-size: clamp(15px, 2.5vw, 19px);
+  line-height: 1.6;
+  background: #F0F4FA;
+  border-radius: 0 3px 3px 0;
+}
+
+.pr-about {
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+  margin-top: 18px;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+/* ── WORKFLOW ── */
+.wf-step { display: grid; grid-template-columns: 32px 1fr; gap: 16px; margin-bottom: 22px; align-items: start; }
+
+.wf-n {
+  width: 30px; height: 30px;
+  background: var(--navy);
+  color: #EEE8DE;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.wf-c h4 { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+.wf-c p { font-size: 13px; color: var(--mid); line-height: 1.8; }
+
+.code-box {
+  background: #1E2A3A;
+  border-radius: 3px;
+  padding: 14px 16px;
+  margin: 10px 0;
+  font-size: clamp(11px, 1.8vw, 13px);
+  color: #B8C8D8;
+  line-height: 1.8;
+  word-break: break-word;
+}
+
+.code-box .cb-l {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: #C8B98A; margin-bottom: 7px;
+}
+
+.out-box {
+  background: #F0F4FA;
+  border: 1px solid #C8D4E8;
+  border-radius: 3px;
+  padding: 14px 16px;
+  margin: 10px 0;
+  font-size: clamp(11px, 1.8vw, 13px);
+  color: var(--ink);
+  line-height: 1.8;
+}
+
+.out-box .cb-l {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--navy-mid); margin-bottom: 7px;
+}
+
+/* ── ABOUT ── */
+.about-section {
+  background: var(--navy);
+  padding: clamp(60px, 9vw, 96px) 0 clamp(80px, 12vw, 120px);
+  margin-top: clamp(60px, 9vw, 96px);
+}
+
+.about-statement {
+  font-family: var(--display);
+  font-size: clamp(26px, 5.5vw, 50px);
+  font-weight: 600;
+  line-height: 1.15;
+  color: #EEE8DE;
+  max-width: 760px;
+  margin-bottom: clamp(36px, 5vw, 56px);
+}
+
+.about-statement em { font-style: italic; font-weight: 400; color: #C8B98A; }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+  gap: 1px;
+  background: #2A4A6A;
+  border: 1px solid #2A4A6A;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: clamp(32px, 5vw, 48px);
+}
+
+.about-cell {
+  background: #1E3A5A;
+  padding: clamp(20px, 3vw, 28px);
+}
+
+.about-cell h4 {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #C8B98A;
+  margin-bottom: 12px;
+}
+
+.about-cell p, .about-cell li {
+  font-size: clamp(12px, 1.8vw, 13px);
+  color: #8FAFC8;
+  line-height: 1.85;
+}
+
+.about-cell ul { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+
+.about-cell ul li { padding-left: 14px; position: relative; }
+.about-cell ul li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 9px;
+  width: 6px; height: 1px;
+  background: #C8B98A;
+}
+
+.about-links { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.about-link {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--navy);
+  background: #C8B98A;
+  padding: 11px 22px;
+  border-radius: 3px;
+  transition: opacity 0.15s;
+}
+
+.about-link:hover { opacity: 0.88; }
+
+.about-link-ghost {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #C8B98A;
+  border: 1px solid #4A6A8A;
+  padding: 11px 22px;
+  border-radius: 3px;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.about-link-ghost:hover { background: rgba(200,185,138,0.08); border-color: #C8B98A; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 500px) {
+  .s-head { gap: 8px; }
+  .wf-step { grid-template-columns: 28px 1fr; gap: 10px; }
+  .wf-n { width: 26px; height: 26px; font-size: 11px; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.tile { animation: fadeUp 0.45s ease both; }
+.tile:nth-child(2) { animation-delay: 0.09s; }
+.tile:nth-child(3) { animation-delay: 0.18s; }
+
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="w">
+    <h1 class="hero-name">Rayhan<em>Ahmed</em></h1>
+    <div class="hero-bottom">
+      <p class="hero-tagline">Writing that earns attention. Outreach that gets replies. Strategy backed by AI.</p>
+      <nav class="hero-links">
+        <a href="https://linkedin.com/in/rayhanahmed96" class="hero-link" target="_blank">LinkedIn</a>
+        <a href="https://rriyad.github.io/rayhanahmed" class="hero-link" target="_blank">Portfolio</a>
+        <a href="mailto:rayhanahmed61996@gmail.com" class="hero-link">Email</a>
+      </nav>
+    </div>
+  </div>
+  <div class="chips-bar">
+    <div class="chips-inner">
+      <span class="chip">Cold Outreach</span>
+      <span class="chip">Brand Messaging</span>
+      <span class="chip">Press Releases</span>
+      <span class="chip">News Writing</span>
+      <span class="chip">Opinion Writing</span>
+      <span class="chip">AI Workflows</span>
+    </div>
+  </div>
+</header>
+
+<div class="spec-bar">
+  <div class="spec-bar-inner">
+    <div class="spec-dot"></div>
+    <p><strong>Note:</strong> Outreach, brand, and PR samples are original spec work created to demonstrate communication skills — not produced for any real company. The news writing sample is academic coursework from Fullerton College.</p>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="topnav" aria-label="Sections">
+  <div class="topnav-inner">
+    <a href="#outreach">Cold Outreach</a>
+    <a href="#brand">Brand Messaging</a>
+    <a href="#pr">Press Release</a>
+    <a href="#ai">AI Workflow</a>
+    <a href="#news">News Writing</a>
+    <a href="#opinion">Opinion</a>
+    <a href="#about">About</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 OUTREACH -->
+  <section class="s" id="outreach">
+    <div class="w">
+      <div class="s-head">
+        <div class="s-num" aria-hidden="true">01</div>
+        <div class="s-titles">
+          <div class="s-label">SDR Writing</div>
+          <h2 class="s-title">Cold Outreach Email Sequence</h2>
+        </div>
+      </div>
+      <div class="s-rule"></div>
+      <p class="s-desc">A three-email sequence for a B2B project management platform. Shows prospecting copy, follow-up discipline, and a respectful close. <em>Spec work.</em></p>
+
+      <div class="tile">
+        <div class="tile-head">
+          <div class="tile-type">Email 1 of 3 — First Touch</div>
+          <div class="tile-name">Opening the conversation</div>
+          <div class="tile-sub">Goal: generate curiosity and earn a reply</div>
+          <div class="tile-tags"><span class="ttag">Prospecting</span><span class="ttag">B2B Tech</span></div>
+        </div>
+        <div class="tile-body">
+          <div class="email-mock">
+            <div class="email-chrome"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span></div>
+            <div class="email-fields">
+              <div class="ef"><span class="ef-l">To</span><span class="ef-v">Head of Operations — [Mid-Size Tech Company]</span></div>
+              <div class="ef"><span class="ef-l">Subject</span><span class="ef-v">Quick question about how your team tracks projects</span></div>
+            </div>
+            <div class="email-body">
+              <p>Hi,</p>
+              <p>I noticed your company recently expanded the customer success team to 12 people. Growing teams usually hit a wall around that size where project visibility starts slipping through the cracks.</p>
+              <p>We help ops teams stay aligned without the weekly status meeting overhead. Curious — is scattered project tracking something you are actively working to fix, or is it working well enough?</p>
+              <p>Either answer is genuinely useful for me.</p>
+              <p>Rayhan<br>[Project Management Platform]</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tile">
+        <div class="tile-head">
+          <div class="tile-type">Email 2 of 3 — Follow Up</div>
+          <div class="tile-name">Adding value, not pressure</div>
+          <div class="tile-sub">Goal: re-engage without being pushy</div>
+          <div class="tile-tags"><span class="ttag">Follow-up</span><span class="ttag">Value-add</span></div>
+        </div>
+        <div class="tile-body">
+          <div class="email-mock">
+            <div class="email-chrome"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span></div>
+            <div class="email-fields">
+              <div class="ef"><span class="ef-l">To</span><span class="ef-v">Head of Operations — [Mid-Size Tech Company]</span></div>
+              <div class="ef"><span class="ef-l">Subject</span><span class="ef-v">RE: Quick question about how your team tracks projects</span></div>
+            </div>
+            <div class="email-body">
+              <p>Hi,</p>
+              <p>Wanted to follow up in case my last note got buried.</p>
+              <p>I put together a short breakdown of how three other ops teams at your company size cut their project update meetings in half using async status tracking. Thought it might be worth two minutes regardless of whether this is a fit.</p>
+              <p>Happy to send it over if you want.</p>
+              <p>Rayhan</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tile">
+        <div class="tile-head">
+          <div class="tile-type">Email 3 of 3 — Breakup</div>
+          <div class="tile-name">The respectful close</div>
+          <div class="tile-sub">Goal: get a definitive answer and leave the door open</div>
+          <div class="tile-tags"><span class="ttag">Objection Handling</span><span class="ttag">Closing</span></div>
+        </div>
+        <div class="tile-body">
+          <div class="email-mock">
+            <div class="email-chrome"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span></div>
+            <div class="email-fields">
+              <div class="ef"><span class="ef-l">To</span><span class="ef-v">Head of Operations — [Mid-Size Tech Company]</span></div>
+              <div class="ef"><span class="ef-l">Subject</span><span class="ef-v">Closing the loop</span></div>
+            </div>
+            <div class="email-body">
+              <p>Hi,</p>
+              <p>I know your inbox is busy, so I will keep this short.</p>
+              <p>If project tracking is not a priority right now, completely understood. Just reply with a "not now" and I will take you off my list with no hard feelings.</p>
+              <p>If the timing is just off, I am happy to check back in a few months instead.</p>
+              <p>Either way, thanks for your time.</p>
+              <p>Rayhan</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 BRAND MESSAGING -->
+  <section class="s" id="brand">
+    <div class="w">
+      <div class="s-head">
+        <div class="s-num" aria-hidden="true">02</div>
+        <div class="s-titles">
+          <div class="s-label">Content Writing</div>
+          <h2 class="s-title">Brand Messaging Document</h2>
+        </div>
+      </div>
+      <div class="s-rule"></div>
+      <p class="s-desc">A brand messaging framework for an AI customer support platform. Aligns sales, marketing, and product on voice, tone, and audience. <em>Spec work.</em></p>
+
+      <div class="tile">
+        <div class="tile-head">
+          <div class="tile-type">Brand Messaging Framework</div>
+          <div class="tile-name">[AI Customer Support Platform]</div>
+          <div class="tile-sub">Internal guide for marketing and sales alignment</div>
+          <div class="tile-tags"><span class="ttag">Brand Voice</span><span class="ttag">Messaging Strategy</span><span class="ttag">B2B Tech</span></div>
+        </div>
+        <div class="tile-body">
+          <div class="bm">
+            <div class="bm-label">One-Line Positioning</div>
+            <p>This platform gives support teams the speed of AI with the warmth of a human — so customers always feel heard, not handled.</p>
+          </div>
+          <div class="bm">
+            <div class="bm-label">Who We Are Talking To</div>
+            <p>Customer success leads at tech companies with 50 to 500 employees. Managing growing ticket volume with a lean team and tired of choosing between fast responses and good ones.</p>
+          </div>
+          <div class="bm">
+            <div class="bm-label">Core Messages by Audience</div>
+            <ul>
+              <li>For CS Leads: Cut average response time by 60% without adding headcount or losing your brand's tone.</li>
+              <li>For Support Agents: It handles the repetitive tickets so you can focus on conversations that actually need a human.</li>
+              <li>For Executives: Turn support from a cost center into a retention driver that surfaces insights your product team can act on.</li>
+            </ul>
+          </div>
+          <div class="bm">
+            <div class="bm-label">Tone of Voice</div>
+            <ul>
+              <li>Confident but not arrogant. We know what we are good at and say it plainly.</li>
+              <li>Practical over polished. Real language, not buzzword soup.</li>
+              <li>Empathetic. We build tools for people who serve other people. That shows in every line.</li>
+            </ul>
+          </div>
+          <div class="bm">
+            <div class="bm-label">Words We Never Use</div>
+            <ul>
+              <li>Revolutionary, game-changing, or best-in-class — everyone says it, nobody believes it.</li>
+              <li>Leverage synergies — we are not a consulting firm.</li>
+              <li>Simply or just in front of complex claims — it dismisses real work.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 PRESS RELEASE -->
+  <section class="s" id="pr">
+    <div class="w">
+      <div class="s-head">
+        <div class="s-num" aria-hidden="true">03</div>
+        <div class="s-titles">
+          <div class="s-label">PR Writing</div>
+          <h2 class="s-title">Product Launch Press Release</h2>
+        </div>
+      </div>
+      <div class="s-rule"></div>
+      <p class="s-desc">An AP-style press release for an enterprise product launch. Headline writing, quote integration, and turning technical features into a newsworthy story. <em>Spec work.</em></p>
+
+      <div class="tile">
+        <div class="tile-head">
+          <div class="tile-type">Press Release — Product Launch</div>
+          <div class="tile-name">[AI Support Platform] Launches Enterprise Tier with Real-Time Sentiment Analysis</div>
+          <div class="tile-sub">For immediate release</div>
+          <div class="tile-tags"><span class="ttag">AP Style</span><span class="ttag">Product Launch</span><span class="ttag">PR Writing</span></div>
+        </div>
+        <div class="tile-body">
+          <div class="pr-slug">For Immediate Release</div>
+          <h3 class="pr-hed">[AI Support Platform] Launches Enterprise Tier, Bringing Real-Time Sentiment Analysis to Customer Support Teams</h3>
+          <p class="pr-deck">New offering helps growing companies detect at-risk customers before they churn, using AI that understands tone — not just keywords.</p>
+          <div class="pr-body">
+            <p>The platform, an AI-powered customer support solution used by over 1,200 companies, today announced the launch of its Enterprise tier — designed for support teams managing high-volume, high-stakes customer relationships.</p>
+            <p>The centerpiece is real-time sentiment analysis, a feature that flags emotionally charged support tickets as they arrive so agents can prioritize responses before a frustrated customer becomes a lost one. Unlike keyword-based detection tools, the platform reads context — identifying at-risk signals even when customers have not said so directly.</p>
+            <div class="pr-pull">"Support teams have always known that how a customer feels matters as much as what they are asking for. We built Enterprise to give them a way to act on that instinct at scale."<br>— CEO, [AI Support Platform]</div>
+            <p>Early access customers reported a 34% reduction in churn-related escalations during a four-month beta. The Enterprise tier is available immediately for teams of 25 or more agents, starting at $800 per month.</p>
+            <p>The product also includes a unified inbox, custom escalation routing, and a real-time analytics dashboard surfacing communication trends weekly.</p>
+            <div class="pr-about"><strong>About the Platform:</strong> An AI-powered customer support solution combining automation with human-centered design. Serving over 1,200 companies across North America and Europe.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 AI WORKFLOW -->
+  <section class="s" id="ai">
+    <div class="w">
+      <div class="s-head">
+        <div class="s-num" aria-hidden="true">04</div>
+        <div class="s-titles">
+          <div class="s-label">AI Workflow</div>
+          <h2 class="s-title">Research to Content in 4 Steps</h2>
+        </div>
+      </div>
+      <div class="s-rule"></div>
+      <p class="s-desc">How I go from a raw brief to a polished content asset in under 30 minutes using Claude. A repeatable process — not a one-off trick.</p>
+
+      <div class="tile">
+        <div class="tile-head">
+          <div class="tile-type">Workflow Documentation</div>
+          <div class="tile-name">Brief to Blog Post with AI</div>
+          <div class="tile-sub">Research, outline, draft, and edit — with AI doing the heavy lifting</div>
+          <div class="tile-tags"><span class="ttag">Prompt Engineering</span><span class="ttag">Claude AI</span><span class="ttag">Content Strategy</span></div>
+        </div>
+        <div class="tile-body">
+          <div class="wf-step">
+            <div class="wf-n">1</div>
+            <div class="wf-c">
+              <h4>Write a focused brief first</h4>
+              <p>Define the audience, goal, tone, and single key takeaway before touching AI. The quality of the output is only as good as the clarity of the brief.</p>
+            </div>
+          </div>
+          <div class="wf-step">
+            <div class="wf-n">2</div>
+            <div class="wf-c">
+              <h4>Use a research synthesis prompt</h4>
+              <p>Feed the brief and source material into Claude asking for key insights only — not a summary.</p>
+              <div class="code-box">
+                <div class="cb-l">Prompt</div>
+                You are a content researcher. Based on the brief below, identify the 5 most compelling and non-obvious insights a B2B buyer would find useful. Do not summarize sources. Pull out what is surprising or underreported. Brief: [paste brief here]
+              </div>
+              <div class="out-box">
+                <div class="cb-l">Output excerpt</div>
+                Insight 3: Most churn does not happen at renewal. It happens in the first 30 days when onboarding friction causes silent disengagement — customers stop logging in before they have officially decided to leave...
+              </div>
+            </div>
+          </div>
+          <div class="wf-step">
+            <div class="wf-n">3</div>
+            <div class="wf-c">
+              <h4>Generate an editorial outline</h4>
+              <p>Prompt Claude to build a scannable outline with a hook, three core sections, and a call to action. Review and reorder manually before drafting.</p>
+            </div>
+          </div>
+          <div class="wf-step">
+            <div class="wf-n">4</div>
+            <div class="wf-c">
+              <h4>Draft, then edit by hand</h4>
+              <p>Generate a first draft with tone instructions baked in, then edit every paragraph manually. The AI draft is a starting point. Final editing is always done by me so the piece sounds like the brand, not like a language model.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 NEWS WRITING -->
+  <section class="s" id="news">
+    <div class="w">
+      <div class="s-head">
+        <div class="s-num" aria-hidden="true">05</div>
+        <div class="s-titles">
+          <div class="s-label">News Writing</div>
+          <h2 class="s-title">Breaking News Article</h2>
+        </div>
+      </div>
+      <div class="s-rule"></div>
+      <p class="s-desc">An AP-style breaking news article written for Communication Studies coursework at Fullerton College. Inverted pyramid structure, multi-source attribution, and accuracy on a fast-moving story.</p>
+
+      <div class="tile">
+        <div class="tile-head">
+          <div class="tile-type">Breaking News — Academic Coursework, Fullerton College</div>
+          <div class="tile-name">TV Crew Member Killed in Friendly Fire During Omaha Robbery Response</div>
+          <div class="tile-sub">Written for Communication Studies coursework at Fullerton College</div>
+          <div class="tile-tags"><span class="ttag">AP Style</span><span class="ttag">Breaking News</span><span class="ttag">Inverted Pyramid</span><span class="ttag">Coursework</span></div>
+        </div>
+        <div class="tile-body">
+          <div class="pr-body">
+            <p>A "COPS" TV crew member was shot and killed in a friendly-fire incident at a Wendy's in Omaha when police opened fire during an attempted robbery, authorities said.</p>
+            <p>Police said the crew member was struck by an officer's bullet during a chaotic burst of gunfire inside the restaurant, where officers confronted a robbery suspect armed with what turned out to be a realistic airsoft pistol. The suspect was also shot and killed, and the case is under review by the Omaha Police Department's officer-involved investigations squad; a grand jury will also be convened.</p>
+            <p>Police Chief Todd Schmaderer outlined the shooting at a news conference, offering condolences to the families of both men and saying the department would be "unprecedentedly transparent" as investigators examine the officers' actions.</p>
+            <p>Schmaderer said the confrontation began when officers were sent to a robbery at a Little Caesar's pizza at 637 N. Saddle Creek Road. Detective Darren Cunningham then radioed from a nearby Wendy's on Dodge Street to report a robbery in progress and called for backup.</p>
+            <p>Within about 15 seconds, Officers Brooks Riley and Jason Wilhelm arrived, accompanied by cameraman Michael Lee and sound technician Bryce Dion from Langley Productions, producers of "COPS." Cunningham and Riley entered through the east door, followed by Lee, while Wilhelm went in through the west door.</p>
+            <p>Inside, officers confronted robbery suspect Cortez Washington, 32, who was armed with what appeared to be a handgun. Three witnesses told investigators they saw Washington firing directly at Cunningham and Riley and heard the first two shots come from the suspect's gun.</p>
+            <p>The officers returned fire. Washington fled out the east doors before collapsing in the parking lot, where he was handcuffed and later pronounced dead at the University of Nebraska Medical Center. His weapon was recovered and found to be an airsoft pistol — firing plastic pellets but closely resembling a real firearm.</p>
+            <div class="pr-pull">"Nobody wanted Bryce to get hurt. Nobody wanted anybody to get hurt. Police work is very dangerous. It's very chaotic."<br>— Police Chief Todd Schmaderer</div>
+            <p>Dion, 38, was struck by a single round in the front vestibule near the east entrance. He was wearing a ballistic vest, but the bullet entered through his left arm and slipped between an open area of the vest. He was pronounced dead at the University of Nebraska Medical Center.</p>
+            <p>Schmaderer confirmed the shooting was friendly fire. "It was an officer's round that struck Mr. Dion," he said. The three officers who fired were placed on paid administrative leave — standard procedure whenever an officer discharges a weapon and injury or death occurs.</p>
+            <p>Executive producer Morgan Langley described Dion as one of the company's most experienced employees. "Bryce has been with us for seven years, and honestly, he really is one of our best," Langley said.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 OPINION PIECE -->
+  <section class="s" id="opinion">
+    <div class="w">
+      <div class="s-head">
+        <div class="s-num" aria-hidden="true">06</div>
+        <div class="s-titles">
+          <div class="s-label">Opinion Writing</div>
+          <h2 class="s-title">Point of View</h2>
+        </div>
+      </div>
+      <div class="s-rule"></div>
+      <p class="s-desc">An original opinion piece written in my own voice on a topic I think about seriously. This one is not spec work — it is how I actually see the world.</p>
+
+      <div class="tile">
+        <div class="tile-head">
+          <div class="tile-type">Opinion — Original Writing</div>
+          <div class="tile-name">AI Is Not the Threat. Refusing to Adapt Is.</div>
+          <div class="tile-sub">On why the fear of AI says more about us than it does about the technology</div>
+          <div class="tile-tags"><span class="ttag">Original Writing</span><span class="ttag">Opinion</span><span class="ttag">AI and Work</span></div>
+        </div>
+        <div class="tile-body">
+          <div class="pr-body">
+            <p>Every major technological shift in history has been met with the same response — fear first, adaptation second, dependency third. The printing press threatened scribes. Automobiles threatened horse traders. The internet threatened every industry that had not figured out it was already obsolete. AI is no different, except that this time the resistance is louder, faster, and considerably more dramatic.</p>
+
+            <p>The conversation around AI is full of mixed signals. On one side, organizations are racing to integrate it into every workflow they can find. On the other, individuals are treating it like an existential threat to their livelihoods, their relevance, and in some cases their identity. Both reactions are understandable. Neither is particularly useful.</p>
+
+            <div class="pr-pull">"The issue is not that AI is too powerful. The issue is that too many people are waiting for someone else to figure out what to do with it."</div>
+
+            <p>Here is what I actually believe: AI is a toolbox. An extraordinary, fast-evolving, occasionally overwhelming toolbox — but a toolbox nonetheless. A hammer does not replace a carpenter. It makes the carpenter more capable. The people treating AI as a replacement are misunderstanding what it does. The people treating it as a threat are misunderstanding what they do.</p>
+
+            <p>What concerns me more than AI itself is the gap it is quietly creating. The professionals who engage with it seriously — who learn to prompt well, think critically about its outputs, and build workflows around its strengths — are pulling ahead. The ones who avoid it are not staying still. They are falling behind at the pace AI is moving forward. That gap is going to be very difficult to close in three years. Nearly impossible in five.</p>
+
+            <p>This is not about becoming a machine learning engineer or understanding how transformers work. It is about developing a minimum threshold of AI literacy — knowing which tools exist, what they are good at, where they fail, and how to direct them toward real problems. That threshold is not high. But you have to choose to cross it.</p>
+
+            <p>Industries do not wait for everyone to catch up. They restructure around whoever adapted first. The professionals who frame AI as a threat are not wrong that change is coming — they are just drawing the wrong conclusion from it. The threat is not the technology. The threat is the widening distance between the people who decided to learn and the people who decided to wait.</p>
+
+            <p>We all have the same window of time to close that distance. The question is whether we use it.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<section class="about-section" id="about">
+  <div class="w">
+    <div class="s-head" style="margin-bottom:10px;">
+      <div class="s-num" style="color:#2A4A6A;" aria-hidden="true">07</div>
+      <div class="s-titles">
+        <div class="s-label" style="color:#C8B98A;">About</div>
+        <h2 class="s-title" style="color:#EEE8DE;">Rayhan Ahmed</h2>
+      </div>
+    </div>
+    <div class="s-rule" style="background:#2A4A6A;margin-bottom:28px;"></div>
+
+    <p class="about-statement">A Communication Studies graduate who writes clearly, listens well, and uses AI at an <em>advanced level</em> to produce work that most experienced professionals cannot match on speed or quality.</p>
+
+    <div class="about-grid">
+      <div class="about-cell">
+        <h4>Education</h4>
+        <ul>
+          <li>AA in Communication Studies — Fullerton College, 2025. GPA 3.85, Major GPA 4.0</li>
+          <li>AS in Engineering, Aerospace Track — Fullerton College, Expected 2026 to 2027</li>
+        </ul>
+      </div>
+      <div class="about-cell">
+        <h4>AI Tools</h4>
+        <ul>
+          <li>Claude — research synthesis, drafts, tone editing</li>
+          <li>ChatGPT — brainstorming, copy variations</li>
+          <li>Gemini — research, multi-source summarization</li>
+          <li>Perplexity — real-time research and verification</li>
+          <li>Midjourney — visual content direction</li>
+          <li>Notion AI — documentation and knowledge base</li>
+          <li>Comfortable picking up any new AI tool quickly</li>
+        </ul>
+      </div>
+      <div class="about-cell">
+        <h4>Core Skills</h4>
+        <ul>
+          <li>Cold outreach and prospecting copy</li>
+          <li>Brand voice and messaging strategy</li>
+          <li>AP-style news and PR writing</li>
+          <li>Active listening and needs assessment</li>
+          <li>Prompt engineering for communication workflows</li>
+          <li>Public speaking and group facilitation</li>
+        </ul>
+      </div>
+      <div class="about-cell">
+        <h4>What I Bring</h4>
+        <p>Writes clearly, listens well, and uses AI as a professional force multiplier. 400 or more hours of one-on-one communication experience. 5 out of 5 satisfaction rating. Built for roles that demand more.</p>
+      </div>
+    </div>
+
+    <div class="about-links">
+      <a href="https://linkedin.com/in/rayhanahmed96" class="about-link" target="_blank">LinkedIn</a>
+      <a href="https://rriyad.github.io/rayhanahmed" class="about-link-ghost" target="_blank">Full Portfolio</a>
+      <a href="mailto:rayhanahmed61996@gmail.com" class="about-link-ghost">Email Me</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  const links = document.querySelectorAll('.topnav a');
+  const sections = document.querySelectorAll('[id]');
+
+  function highlight() {
+    let active = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 80) active = s.id;
+    });
+    links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + active));
+  }
+
+  window.addEventListener('scroll', highlight, { passive: true });
+  highlight();
+</script>
+
+</body>
+</html>
